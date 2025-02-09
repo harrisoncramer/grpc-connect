@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "@bufbuild/buf": "^1.50.0",
+    "@bufbuild/protoc-gen-es": "^2.2.3"
+  },
+  "name": "grpc-connect",
+  "version": "1.0.0",
+  "description": "This shows how you can use `.proto` files as the source of truth for APIs across the stack. This includes:",
+  "main": "index.js",
+  "dependencies": {
+    "debug": "^4.4.0",
+    "ms": "^2.1.3",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package math.v1;
+
+option go_package = "github.com/harrisoncramer/grpc-connect-http/apis/gen/math/v1;mathv1";
+
+message AddRequest {
+  int32 first = 1;
+  int32 second = 2;
+}
+
+message AddResponse {
+  int32 result = 1;
+}
+
+message MultiplyRequest {
+  int32 first = 1;
+  int32 second = 2;
+}
+
+message MultiplyResponse {
+  int32 result = 1;
+}
+
+service MathService {
+  rpc Add(AddRequest) returns (AddResponse) {}
+  rpc Multiply(MultiplyRequest) returns (MultiplyResponse) {}
+}

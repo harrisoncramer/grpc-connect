@@ -1,0 +1,55 @@
+version: "3"
+
+tasks:
+  setup:
+    desc: Installs relevant binaries and compiler plugins for local development
+    cmds:
+      - go mod tidy
+      - cat tools/tools.go | grep _ | awk -F'"' '{print $2}' | xargs -tI % go install % # Tooling for building Go code.
+      - npm install -D @bufbuild/buf @bufbuild/protoc-gen-es
+      - cd client && npm i # Client specific dependencies to consume typescript code
+  gen:
+    dir: apis
+    cmds:
+      - buf lint
+      - buf generate
+      - npx buf generate --template buf.client.gen.yaml
+  dev:
+    desc: "Runs the gRPC and HTTP servers"
+    cmds:
+      - HTTP_PORT={{.HTTP_PORT}} GRPC_PORT={{.GRPC_PORT}} air
+  # You can hit the HTTP endpoint with a normal REST API Call
+  call:http-hello:
+    cmds:
+      - |
+        curl --header "Content-Type: application/json" \
+             --data '{"name": "Jane"}' \
+             http://localhost:8084/greet.v1.GreetService/Hello
+  # You can also call the gRPC endpoints
+  call:grpc-hello:
+    cmds:
+      - |
+        grpcurl -d '{"name": "Jane"}' \
+                -plaintext \
+                localhost:3093 greet.v1.GreetService/Hello
+  # You can also call the gRPC endpoints
+  call:grpc-add:
+    cmds:
+      - |
+        grpcurl -d '{"first": 10, "second": 12 }' \
+                -plaintext \
+                localhost:3093 math.v1.MathService/Add
+  client:build:
+    desc: "Compile Typescript code"
+    dir: client
+    cmds:
+      - npm run build
+  client:run:
+    dir: client
+    deps:
+      - client:build
+    cmds:
+      - node dist/index.js
+env:
+  HTTP_PORT: 8084
+  GRPC_PORT: 3093

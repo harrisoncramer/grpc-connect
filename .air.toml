@@ -1,0 +1,15 @@
+[build]
+  include_dir = ["cmd", "apis/gen"]
+  cmd = "go build -o ./cmd/server/main ./cmd/server/main.go"
+  bin = "cmd/server/main"
+  stop_on_error = true
+
+[run]
+  cmd = "./cmd/server/main"
+
+[watch]
+  dirs = ["cmd"]
+
+[logger]
+  color = true
+  pretty = true
