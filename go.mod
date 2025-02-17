@@ -6,7 +6,6 @@ require (
 	connectrpc.com/connect v1.18.1
 	github.com/bufbuild/buf v1.50.0
 	github.com/fullstorydev/grpcurl v1.9.2
-	golang.org/x/net v0.34.0
 	google.golang.org/grpc v1.69.4
 	google.golang.org/protobuf v1.36.5
 )
@@ -122,6 +121,7 @@ require (
 	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8 // indirect
 	golang.org/x/mod v0.22.0 // indirect
+	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/oauth2 v0.23.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
